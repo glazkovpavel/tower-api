@@ -1,6 +1,5 @@
 import {sequelize} from '../../db/database';
 import {DataTypes} from 'sequelize';
-import {UserTheme} from './user-theme';
 
 export const SiteTheme = sequelize.define(
   "site_theme",
@@ -16,19 +15,11 @@ export const SiteTheme = sequelize.define(
     description: {
       type: DataTypes.STRING,
     },
+    userId: {
+      type: DataTypes.STRING,
+    }
   },
   {
     timestamps: false,
   }
 );
-
-
-SiteTheme.hasMany(UserTheme, {
-  foreignKey: "userId",
-  sourceKey: "id",
-});
-
-UserTheme.belongsTo(SiteTheme, {
-  foreignKey: "userId",
-  targetKey: "id"
-});

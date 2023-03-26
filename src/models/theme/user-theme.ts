@@ -6,16 +6,13 @@ import {DataTypes} from 'sequelize';
 export const UserTheme = sequelize.define(
   "user_theme",
   {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    theme: {
+    themeId: {
       type: DataTypes.STRING,
+      allowNull: true
     },
-    description: {
+    userId: {
       type: DataTypes.STRING,
+      allowNull: true
     },
   },
   {
