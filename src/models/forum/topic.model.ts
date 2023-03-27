@@ -1,21 +1,21 @@
 import {sequelize} from '../../db/database';
 import {DataTypes} from 'sequelize';
 
-export const SiteTheme = sequelize.define(
-  "site_theme",
+export const TopicModel = sequelize.define(
+  "topic",
   {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    theme: {
+    title: {
       type: DataTypes.STRING,
     },
     description: {
       type: DataTypes.STRING,
     },
-    userId: {
+    ownerId: {
       type: DataTypes.STRING,
     }
   },

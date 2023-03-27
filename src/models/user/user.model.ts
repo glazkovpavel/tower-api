@@ -12,4 +12,4 @@ const userModel: ModelAttributes<Model, IUser>= {
   },
 };
 
-export const User = sequelize.define("User", userModel, {});
+export const UserModel = sequelize.define("User", userModel, {});

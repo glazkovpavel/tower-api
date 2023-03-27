@@ -3,7 +3,7 @@ import {DataTypes} from 'sequelize';
 
 
 
-export const UserTheme = sequelize.define(
+export const UserThemeModel = sequelize.define(
   "user_theme",
   {
     themeId: {
