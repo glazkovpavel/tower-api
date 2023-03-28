@@ -31,3 +31,33 @@ export const getAllMessagesByTopicId = async (req: Request, res: Response) => {
 
   }
 }
+
+
+export const likeMessage = (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { userId } = req.body;
+  try {
+    const message = CommentsModel.findOne({
+      where: {
+        id: id
+      },
+    })
+    return message.then((item: any) => {
+      if (item) {
+        item.likes.push(userId)
+        return CommentsModel.update(
+          {likes: item.likes},
+          {
+            where: {
+              id: id
+            }
+          }
+        ).then(() => res.json(item))
+      } else {
+         return res.status(404).json({ message: 'Not Found message' });
+      }
+    });
+  } catch (error: any) {
+    return res.status(500).json({ message: error.message });
+  }
+}

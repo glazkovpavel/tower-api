@@ -17,6 +17,14 @@ export const CommentsModel = sequelize.define(
     },
     ownerId: {
       type: DataTypes.STRING,
+    },
+    likes: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      defaultValue: []
+    },
+    dislikes: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      defaultValue: []
     }
   },
   {
