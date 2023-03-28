@@ -20,3 +20,4 @@ Message
   "message": "string",
   "topicId": "string",
   "ownerId": "string"
+* get all messages by topic id: get http://localhost:3000/message/:id

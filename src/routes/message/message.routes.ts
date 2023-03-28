@@ -1,12 +1,12 @@
 import {Router} from 'express';
-import {createMessage} from '../../controllers/comment/message.controller';
+import {createMessage, getAllMessagesByTopicId} from '../../controllers/comment/message.controller';
 
 export const messageRoutes = (router: Router) => {
   const messageRouter: Router = Router();
 
   messageRouter
     .post('/', createMessage)
-    //.get('/', )
+    .get('/topic/:id', getAllMessagesByTopicId)
 
   router.use('/message', messageRouter);
 };
