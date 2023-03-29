@@ -1,6 +1,14 @@
 import {sequelize} from '../../db/database';
 import {DataTypes} from 'sequelize';
 
+export interface ICommentsModel {
+  id: number;
+  message: string;
+  topicId: string;
+  ownerId: string;
+  likes: string[];
+  dislikes: string[];
+}
 export const CommentsModel = sequelize.define(
   "comments",
   {

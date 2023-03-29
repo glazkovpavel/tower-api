@@ -23,3 +23,5 @@ Message
 * get all messages by topic id: get http://localhost:3000/message/:id
 * like message: post http://localhost:3000/message/like/:idMessage body: 
   "userId": string
+* dislike message: post http://localhost:3000/message/dislike/:idMessage body:
+  "userId": string

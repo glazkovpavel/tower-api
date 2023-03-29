@@ -43,8 +43,18 @@ export const likeMessage = (req: Request, res: Response) => {
       },
     })
     return message.then((item: any) => {
-      if (item) {
-        item.likes.push(userId)
+      if (item && !item.likes.some((i: string) => i === userId)) {
+        item.likes.push(userId);
+        return CommentsModel.update(
+          {likes: item.likes},
+          {
+            where: {
+              id: id
+            }
+          }
+        ).then(() => res.json(item))
+      } else if (item && item.likes.some((i: string) => i === userId)) {
+        item.likes = item.likes.filter((i: string) => i !== userId);
         return CommentsModel.update(
           {likes: item.likes},
           {
@@ -55,6 +65,45 @@ export const likeMessage = (req: Request, res: Response) => {
         ).then(() => res.json(item))
       } else {
          return res.status(404).json({ message: 'Not Found message' });
+      }
+    });
+  } catch (error: any) {
+    return res.status(500).json({ message: error.message });
+  }
+}
+
+export const dislikeMessage = (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { userId } = req.body;
+  try {
+    const message = CommentsModel.findOne({
+      where: {
+        id: id
+      },
+    })
+    return message.then((item: any) => {
+      if (item && !item.dislikes.some((i: string) => i === userId)) {
+        item.dislikes.push(userId);
+        return CommentsModel.update(
+          {dislikes: item.dislikes},
+          {
+            where: {
+              id: id
+            }
+          }
+        ).then(() => res.json(item))
+      } else if (item && item.dislikes.some((i: string) => i === userId)) {
+        item.dislikes = item.dislikes.filter((i: string) => i !== userId);
+        return CommentsModel.update(
+          {dislikes: item.dislikes},
+          {
+            where: {
+              id: id
+            }
+          }
+        ).then(() => res.json(item))
+      } else {
+        return res.status(404).json({ message: 'Not Found message' });
       }
     });
   } catch (error: any) {
